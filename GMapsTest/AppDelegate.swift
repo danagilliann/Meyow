@@ -21,18 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.setApplicationId("lWbsp2Ff80NfdnliyH1KU5Q80lIxA2vgC2WlZfJ4", clientKey: "dKjPaNxFoUQ4ypteX1xnKKtvt8lOdHiKWbaRJ713")
         
-        var object = PFObject(className: "TestClass")
-        object.addObject("Banana", forKey: "favoriteFood")
-        object.addObject("Chocolate", forKey: "favoriteIceCream")
-        object.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
-            if (success) {
-                // The object has been saved.
-            } else {
-                // There was a problem, check error.description
-            }
-        }
-        
         // Override point for customization after application launch.
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

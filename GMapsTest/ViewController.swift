@@ -41,6 +41,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
     }
     
+    
     // Facebook Delegate Methods
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
@@ -71,7 +72,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         println("User Logged Out")
     }
     
-    
     func googleMaps() {
         let locationManager = CLLocationManager()
         
@@ -97,23 +97,38 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         mapView.myLocationEnabled = true
         self.view = mapView
         
+        
         var marker = GMSMarker()
+        
+        //marker.title = "SEND MEOW"
         marker.position = CLLocationCoordinate2DMake(myLat, myLong)
-        marker.snippet = "SEND MEOW"
+        
+        let markerButton = UIButton(frame: CGRectMake(60, 50, 100, 70))
+        self.view.addSubview(markerButton)
+        markerButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        markerButton.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        markerButton.setTitle(marker.title, forState: UIControlState.Normal)
+        markerButton.backgroundColor = UIColor.blackColor()
+        
         marker.map = mapView
         
-        
     }
+    
+    func pressed(sender: UIButton!, marker:GMSMarker) {
+        var myLat = marker.position.latitude
+        var myLong = marker.position.longitude
+        
+        let point = PFGeoPoint(latitude: myLat, longitude: myLong)
+        var placeObject = PFObject(className: "locationOfMeows")
+        placeObject["location"] = point
 
-    
-    
+    }
+   
     func returnUserData()
     {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
-            // let email = user.valueForKey("email") as String
-            //let email = user
             
             if ((error) != nil)
             {
@@ -122,14 +137,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
             }
             else
             {
-                //loginView.hidden = true
-                
                 println("fetched user: \(result)")
                 let userName : NSString = result.valueForKey("name") as! NSString
                 println("User Name is: \(userName)")
                 let userId : NSString = result.valueForKey("id") as! NSString
-                println("User Id \(userId)")
                 
+
                 self.googleMaps()
             }
         })
