@@ -72,6 +72,31 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         println("User Logged Out")
     }
     
+    func pressed(markerButton:UIButton) {
+        println("In function")
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            println("In geopoint")
+            if error == nil {
+                // do something with the new geoPoint
+                var marker = GMSMarker()
+                marker.position = CLLocationCoordinate2DMake(geoPoint!.latitude, geoPoint!.longitude)
+                
+                
+                var placeObject = PFObject(className: "locationOfMeows")
+                placeObject["location"] = geoPoint
+                placeObject.saveInBackgroundWithBlock {
+                    (success: Bool, error: NSError?) -> Void in
+                    if (success) {
+                        // The object has been saved.
+                    } else {
+                        // There was a problem, check error.description
+                    }
+                }
+            }
+        }
+    }
+    
     func googleMaps() {
         let locationManager = CLLocationManager()
         
@@ -111,32 +136,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         markerButton.backgroundColor = UIColor.blackColor()
         markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
+        
         marker.map = mapView
+        pressed(markerButton)
         
-    }
-    
-    func pressed(sender: UIButton) {
-        
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-            if error == nil {
-                // do something with the new geoPoint
-                var marker = GMSMarker()
-                marker.position = CLLocationCoordinate2DMake(geoPoint!.latitude, geoPoint!.longitude)
-                
-                
-                var placeObject = PFObject(className: "locationOfMeows")
-                placeObject["location"] = geoPoint
-                placeObject.saveInBackgroundWithBlock {
-                    (success: Bool, error: NSError?) -> Void in
-                    if (success) {
-                        // The object has been saved.
-                    } else {
-                        // There was a problem, check error.description
-                    }
-                }
-            }
-        }
     }
     
     func seeOther(){
