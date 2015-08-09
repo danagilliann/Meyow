@@ -100,15 +100,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
         var marker = GMSMarker()
         
-        //marker.title = "SEND MEOW"
+        marker.title = "SEND MEOW"
         marker.position = CLLocationCoordinate2DMake(myLat, myLong)
         
-        let markerButton = UIButton(frame: CGRectMake(60, 50, 100, 70))
+        let markerButton = UIButton(frame: CGRectMake(110, 550, 150, 40))
         self.view.addSubview(markerButton)
         markerButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         markerButton.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
         markerButton.setTitle(marker.title, forState: UIControlState.Normal)
         markerButton.backgroundColor = UIColor.blackColor()
+        markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         marker.map = mapView
         
