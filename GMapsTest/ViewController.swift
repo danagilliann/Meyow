@@ -168,23 +168,14 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         markerButton.backgroundColor = UIColor.blackColor()
         markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        if markerButton.action = pressed {
-            pressed(markerButton)
-        }
         
         let moreMeows = UIButton(frame: CGRectMake(110, 600, 150, 40))
         self.view.addSubview(moreMeows)
         moreMeows.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        moreMeows.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        moreMeows.addTarget(self, action: "moreMeowsButtonFunc:", forControlEvents: .TouchUpInside)
         moreMeows.setTitle("VIEW MEOWS", forState: UIControlState.Normal)
         moreMeows.backgroundColor = UIColor.blackColor()
         moreMeows.titleLabel?.adjustsFontSizeToFitWidth = true
-        
-        
-        if moreMeows.action = pressed {
-            moreMeowsButtonFunc(moreMeows)
-        }
-
         
         marker.map = mapView
         
