@@ -88,7 +88,19 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
                 println("Success")
                 //marker.snippet = "success"
                 //marker.appearAnimation = kGMSMarkerAnimationPop
-                markerButton.setTitle("Meow Sent", forState: .Normal)
+                
+                var alertView = UIAlertView();
+                alertView.addButtonWithTitle("Ok");
+                alertView.title = "Meow Sent!";
+                alertView.show();
+                
+//                markerButton.setTitle("Meow Sent", forState: .Normal)
+//                var timeButton = markerButton as UIButton
+//                
+//                UIView.animateWithDuration(1.0, animations: { () -> Void in
+//                    self.timeButton.frame = CGRectMake(self.timeButton.frame.origin.x + 25, self.timeButton.frame.origin.y + 25, self.timeButton.frame.size.width, self.timeButton.frame.size.height)
+//                })
+                
                 
             } else {
                 println("Not saved")
