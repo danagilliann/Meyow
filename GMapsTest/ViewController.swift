@@ -101,6 +101,34 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         }
     }
     
+    func moreMeowsButtonFunc(moreMeows: UIButton) {
+        
+        
+        var point = [PFGeoPoint]()
+        
+        point.append(PFGeoPoint(latitude:40.753189, longitude:-73.9893598))
+        point.append(PFGeoPoint(latitude:41.2759, longitude:-73.2894))
+        point.append(PFGeoPoint(latitude:4.3, longitude:-73.7821))
+        point.append(PFGeoPoint(latitude:40.0, longitude:-73.2873))
+        point.append(PFGeoPoint(latitude:41.12780, longitude:-73.29837))
+        point.append(PFGeoPoint(latitude:41.8932, longitude:-72.98273))
+        point.append(PFGeoPoint(latitude: 41.3122, longitude:-72.9283))
+        point.append(PFGeoPoint(latitude:40.84934, longitude:-73.8932))
+        point.append(PFGeoPoint(latitude:41.2478, longitude:-73.8324))
+        point.append(PFGeoPoint(latitude:41.2112, longitude:-73.3874))
+        point.append(PFGeoPoint(latitude:41.9575, longitude:-72.9203))
+        point.append(PFGeoPoint(latitude:40.5639, longitude:-73.193))
+        point.append(PFGeoPoint(latitude:41.9473, longitude:-72.8902))
+        point.append(PFGeoPoint(latitude:40.124, longitude:-73.1946439))
+        
+        for p in point {
+            var marker = GMSMarker()
+            marker.position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
+            //marker.map = mapView
+            
+        }
+    }
+    
     func googleMaps() {
         let locationManager = CLLocationManager()
         
@@ -140,6 +168,13 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         markerButton.backgroundColor = UIColor.blackColor()
         markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
+        
+        
+        func markerButtonFunc(markerButton: UIButton) {
+            self.pressed(markerButton)
+        }
+        
+
         let moreMeows = UIButton(frame: CGRectMake(110, 600, 150, 40))
         self.view.addSubview(moreMeows)
         moreMeows.setTitleColor(UIColor.whiteColor(), forState: .Normal)
@@ -148,42 +183,14 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         moreMeows.backgroundColor = UIColor.blackColor()
         moreMeows.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        func markerButtonFunc(markerButton: UIButton) {
-            self.pressed(markerButton)
+        func moreMeowsFunc(moreMeows: UIButton) {
+            self.pressed(moreMeows)
         }
-    
-        
-        func moreMeowsButtonFunc(moreMeows: UIButton) {
-            
-            
-            var point = [PFGeoPoint]()
-            
-            point.append(PFGeoPoint(latitude:40.753189, longitude:-73.9893598))
-            point.append(PFGeoPoint(latitude:41.2759, longitude:-73.2894))
-            point.append(PFGeoPoint(latitude:4.3, longitude:-73.7821))
-            point.append(PFGeoPoint(latitude:40.0, longitude:-73.2873))
-            point.append(PFGeoPoint(latitude:41.12780, longitude:-73.29837))
-            point.append(PFGeoPoint(latitude:41.8932, longitude:-72.98273))
-            point.append(PFGeoPoint(latitude: 41.3122, longitude:-72.9283))
-            point.append(PFGeoPoint(latitude:40.84934, longitude:-73.8932))
-            point.append(PFGeoPoint(latitude:41.2478, longitude:-73.8324))
-            point.append(PFGeoPoint(latitude:41.2112, longitude:-73.3874))
-            point.append(PFGeoPoint(latitude:41.9575, longitude:-72.9203))
-            point.append(PFGeoPoint(latitude:40.5639, longitude:-73.193))
-            point.append(PFGeoPoint(latitude:41.9473, longitude:-72.8902))
-            point.append(PFGeoPoint(latitude:40.124, longitude:-73.1946439))
-            
-            for p in point {
-                var marker = GMSMarker()
-                marker.position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
-            }
-        }
-        
-        
         
         marker.map = mapView
         
     }
+    
     
     func seeOther(){
         PFGeoPoint.geoPointForCurrentLocationInBackground {
