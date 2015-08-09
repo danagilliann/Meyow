@@ -115,6 +115,30 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
     }
     
+    func pressed(sender: UIButton) {
+        
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                // do something with the new geoPoint
+                var marker = GMSMarker()
+                marker.position = CLLocationCoordinate2DMake(geoPoint!.latitude, geoPoint!.longitude)
+                
+                
+                var placeObject = PFObject(className: "locationOfMeows")
+                placeObject["location"] = geoPoint
+                placeObject.saveInBackgroundWithBlock {
+                    (success: Bool, error: NSError?) -> Void in
+                    if (success) {
+                        // The object has been saved.
+                    } else {
+                        // There was a problem, check error.description
+                    }
+                }
+            }
+        }
+    }
+    
     func seeOther(){
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
@@ -145,29 +169,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         }
     }
     
-    func pressed(sender: UIButton) {
-        
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-            if error == nil {
-                // do something with the new geoPoint
-                var marker = GMSMarker()
-                marker.position = CLLocationCoordinate2DMake(geoPoint!.latitude, geoPoint!.longitude)
 
-                
-                var placeObject = PFObject(className: "locationOfMeows")
-                placeObject["location"] = geoPoint
-                placeObject.saveInBackgroundWithBlock {
-                    (success: Bool, error: NSError?) -> Void in
-                    if (success) {
-                        // The object has been saved.
-                    } else {
-                        // There was a problem, check error.description
-                    }
-                }
-            }
-        }
-    }
         
     func returnUserData() {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
