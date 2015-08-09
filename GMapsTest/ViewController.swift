@@ -40,7 +40,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
     }
     
-    
     // Facebook Delegate Methods
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
