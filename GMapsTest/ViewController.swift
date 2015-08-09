@@ -73,27 +73,27 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
     }
     
     func pressed(markerButton:UIButton) {
+        let geoPoint = PFGeoPoint(latitude: 40.7531589, longitude: -73.9893598)
+        
         println("In function")
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-            println("In geopoint")
-            if error == nil {
-                // do something with the new geoPoint
-                var marker = GMSMarker()
-                marker.position = CLLocationCoordinate2DMake(geoPoint!.latitude, geoPoint!.longitude)
+        var marker = GMSMarker()
+        marker.position = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude)
+        
+        var placeObject = PFObject(className: "locationOfMeows")
+        placeObject["location"] = geoPoint
+        placeObject.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                // The object has been saved.
+                println("Success")
+                marker.snippet = "success"
+                marker.appearAnimation = kGMSMarkerAnimationPop
                 
-                
-                var placeObject = PFObject(className: "locationOfMeows")
-                placeObject["location"] = geoPoint
-                placeObject.saveInBackgroundWithBlock {
-                    (success: Bool, error: NSError?) -> Void in
-                    if (success) {
-                        // The object has been saved.
-                    } else {
-                        // There was a problem, check error.description
-                    }
-                }
+            } else {
+                println("Not saved")
+                // There was a problem, check error.description
             }
+            
         }
     }
     
