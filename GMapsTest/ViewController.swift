@@ -100,8 +100,20 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         }
     }
     
+    func paypal(sender: UIButton!) {
+        if let url = NSURL(string: "https://www.paypal.com/webapps/mpp/search-cause?charityId=13947&s=3") {
+            UIApplication.sharedApplication().openURL(url)
+        }
+        
+    }
+    
     func moreMeowsButtonFunc(moreMeows:UIButton) {
         println("In more meows func")
+        var myLat = 40.7531589 //currentPosition.coordinate.latitude
+        var myLong = -73.9893598 //currentPosition.coordinate.longitude
+        
+        var camera = GMSCameraPosition.cameraWithLatitude(myLat, longitude: myLong, zoom: 10, bearing: 7, viewingAngle: 0)
+        var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
         
         var point = [PFGeoPoint]()
         
@@ -120,13 +132,26 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         point.append(PFGeoPoint(latitude:41.9473, longitude:-72.8902))
         point.append(PFGeoPoint(latitude:40.124, longitude:-73.1946439))
         
-        for p in point {
-            var marker = GMSMarker()
-            marker.position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
-            //marker.map = mapView
-            println(p)
-            
-        }
+        var point1 = GMSMarker()
+        point1.position = CLLocationCoordinate2DMake(40.753189, -73.9893598)
+        point1.map = mapView
+    
+        var point2 = GMSMarker()
+        point2.position = CLLocationCoordinate2DMake(41.2759, -73.2894)
+        point2.map = mapView
+        
+        var point3 = GMSMarker()
+        point3.position = CLLocationCoordinate2DMake(4.3, -73.7821)
+        point3.map = mapView
+        
+        
+//        for p in point {
+//            var marker = GMSMarker()
+//            marker.position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
+//            //marker.map = mapView
+//            println(p)
+//            
+//        }
     }
     
     func googleMaps() {
@@ -159,8 +184,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
         marker.position = CLLocationCoordinate2DMake(myLat, myLong)
         
-        
-        let markerButton = UIButton(frame: CGRectMake(110, 550, 150, 40))
+        let markerButton = UIButton(frame: CGRectMake(80, 400, 150, 40))
         self.view.addSubview(markerButton)
         markerButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         markerButton.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
@@ -169,13 +193,22 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         
-        let moreMeows = UIButton(frame: CGRectMake(110, 600, 150, 40))
+        let moreMeows = UIButton(frame: CGRectMake(80, 450, 150, 40))
         self.view.addSubview(moreMeows)
         moreMeows.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         moreMeows.addTarget(self, action: "moreMeowsButtonFunc:", forControlEvents: .TouchUpInside)
         moreMeows.setTitle("VIEW MEOWS", forState: UIControlState.Normal)
         moreMeows.backgroundColor = UIColor.blackColor()
         moreMeows.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        let donateButton = UIButton(frame: CGRectMake(80, 500, 150, 40))
+        self.view.addSubview(donateButton)
+        donateButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        donateButton.addTarget(self, action: "paypal:", forControlEvents: .TouchUpInside)
+        donateButton.setTitle("DONATE", forState: UIControlState.Normal)
+        donateButton.backgroundColor = UIColor.blackColor()
+        donateButton.titleLabel?.adjustsFontSizeToFitWidth = true
+
         
         marker.map = mapView
         
