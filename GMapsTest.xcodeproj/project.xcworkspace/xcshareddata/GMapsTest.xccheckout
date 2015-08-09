@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B3EBE775-0C87-4F14-995C-85E703E0CD67</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GMapsTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2E87226BEEE3FC4414C4D4C0AA99FBD0C135EF4A</key>
+		<string>github.com:Jessjeanjo/meow.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GMapsTest.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2E87226BEEE3FC4414C4D4C0AA99FBD0C135EF4A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:Jessjeanjo/meow.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2E87226BEEE3FC4414C4D4C0AA99FBD0C135EF4A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2E87226BEEE3FC4414C4D4C0AA99FBD0C135EF4A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>meow</string>
+		</dict>
+	</array>
+</dict>
+</plist>
