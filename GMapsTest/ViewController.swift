@@ -114,9 +114,17 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
     }
     
-    func pressed(sender: UIButton!, marker:GMSMarker) {
-        var myLat = marker.position.latitude
-        var myLong = marker.position.longitude
+    func pressed(sender: UIButton) {
+        
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                // do something with the new geoPoint
+                
+                var myLat = geoPoint.latitude
+                var myLong = geoPoint.longitude
+            }
+        }
         
         let point = PFGeoPoint(latitude: myLat, longitude: myLong)
         var placeObject = PFObject(className: "locationOfMeows")
