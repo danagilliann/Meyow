@@ -114,53 +114,101 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
     }
     
+    func seeOther(){
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                // do something with the new geoPoint
+                // Create a query for places
+                var query = PFQuery(className:"locationOfMeows")
+                // Interested in locations near user.
+                query.whereKey("location", nearGeoPoint:geoPoint!)
+                // Limit what could be a lot of points.
+                query.limit = 100
+                // Final list of objects
+                var objects = query.findObjects()
+                
+                if let objects = objects as? [PFObject] {
+                    for object in objects {
+                        var marker = GMSMarker()  //can be more efficient, but it works for now!!
+                        var point = object["location"] as! PFGeoPoint
+                        marker.position = CLLocationCoordinate2DMake(point.latitude, point.longitude)
+                        println(object.objectId)
+                    }
+                }
+            } else {
+                // Log details of the failure
+                println("Error: \(error!) \(error!.userInfo!)")
+            }
+            
+            }
+        }
+    }
+    
     func pressed(sender: UIButton) {
         
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
                 // do something with the new geoPoint
+                var marker = GMSMarker()
+                marker.position = CLLocationCoordinate2DMake(geoPoint!.latitude, geoPoint!.longitude)
+
                 
-                var myLat = geoPoint.latitude
-                var myLong = geoPoint.longitude
+                var placeObject = PFObject(className: "locationOfMeows")
+                placeObject["location"] = geoPoint
+                placeObject.saveInBackgroundWithBlock {
+                    (success: Bool, error: NSError?) -> Void in
+                    if (success) {
+                        // The object has been saved.
+                    } else {
+                        // There was a problem, check error.description
+                    }
+                }
             }
         }
         
-        let point = PFGeoPoint(latitude: myLat, longitude: myLong)
-        var placeObject = PFObject(className: "locationOfMeows")
-        placeObject["location"] = point
-
-    }
-   
-    func returnUserData()
-    {
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            
-            if ((error) != nil)
-            {
-                // Process error
-                println("Error: \(error)")
-            }
-            else
-            {
-                println("fetched user: \(result)")
-                let userName : NSString = result.valueForKey("name") as! NSString
-                println("User Name is: \(userName)")
-                let userId : NSString = result.valueForKey("id") as! NSString
+        func returnUserData()
+        {
+            let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+            graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
                 
-
-                self.googleMaps()
-            }
-        })
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
+                
+                if ((error) != nil)
+                {
+                    // Process error
+                    println("Error: \(error)")
+                }
+                else
+                {
+                    println("fetched user: \(result)")
+                    let userName : NSString = result.valueForKey("name") as! NSString
+                    println("User Name is: \(userName)")
+                    let userId : NSString = result.valueForKey("id") as! NSString
+                    
+                    
+                    self.googleMaps()
+                }
+                
+            })
+            
+        }
+        
+        func didReceiveMemoryWarning() {
+            super.didReceiveMemoryWarning()
+            // Dispose of any resources that can be recreated.
+        }
+        
 }
+
+
+
+
+   
+
+
+
+
+
+
 
