@@ -41,6 +41,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
     }
     
+    
     // Facebook Delegate Methods
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
@@ -71,7 +72,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         println("User Logged Out")
     }
     
-    
     func googleMaps() {
         let locationManager = CLLocationManager()
         
@@ -97,23 +97,81 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         mapView.myLocationEnabled = true
         self.view = mapView
         
+        
         var marker = GMSMarker()
+        
+        //marker.title = "SEND MEOW"
         marker.position = CLLocationCoordinate2DMake(myLat, myLong)
-        marker.snippet = "SEND MEOW"
+        
+        let markerButton = UIButton(frame: CGRectMake(60, 50, 100, 70))
+        self.view.addSubview(markerButton)
+        markerButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        markerButton.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        markerButton.setTitle(marker.title, forState: UIControlState.Normal)
+        markerButton.backgroundColor = UIColor.blackColor()
+        
         marker.map = mapView
         
-        
     }
+    
+    func seeOther(){
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                // do something with the new geoPoint
+                // Create a query for places
+                var query = PFQuery(className:"locationOfMeows")
+                // Interested in locations near user.
+                query.whereKey("location", nearGeoPoint:geoPoint!)
+                // Limit what could be a lot of points.
+                query.limit = 100
+                // Final list of objects
+                var objects = query.findObjects()
+                
+                if let objects = objects as? [PFObject] {
+                    for object in objects {
+                        var marker = GMSMarker()  //can be more efficient, but it works for now!!
+                        var point = object["location"] as! PFGeoPoint
+                        marker.position = CLLocationCoordinate2DMake(point.latitude, point.longitude)
+                    }
+                }
+            }
+            else
+            {
+                // Log details of the failure
+                println("Error: \(error!) \(error!.userInfo!)")
+            }
+        }
+    }
+    
+    func pressed(sender: UIButton) {
+        
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                // do something with the new geoPoint
+                var marker = GMSMarker()
+                marker.position = CLLocationCoordinate2DMake(geoPoint!.latitude, geoPoint!.longitude)
 
-    
-    
-    func returnUserData()
-    {
+                
+                var placeObject = PFObject(className: "locationOfMeows")
+                placeObject["location"] = geoPoint
+                placeObject.saveInBackgroundWithBlock {
+                    (success: Bool, error: NSError?) -> Void in
+                    if (success) {
+                        // The object has been saved.
+                    } else {
+                        // There was a problem, check error.description
+                    }
+                }
+            }
+        }
+    }
+        
+    func returnUserData() {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
-            // let email = user.valueForKey("email") as String
-            //let email = user
             
             if ((error) != nil)
             {
@@ -122,17 +180,17 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
             }
             else
             {
-                //loginView.hidden = true
-                
                 println("fetched user: \(result)")
                 let userName : NSString = result.valueForKey("name") as! NSString
                 println("User Name is: \(userName)")
                 let userId : NSString = result.valueForKey("id") as! NSString
-                println("User Id \(userId)")
+                
                 
                 self.googleMaps()
             }
+            
         })
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -140,6 +198,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         // Dispose of any resources that can be recreated.
     }
     
-
 }
+
+
+
+
+   
+
+
+
+
+
+
 
