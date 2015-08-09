@@ -12,20 +12,24 @@
 	<dict>
 		<key>2E87226BEEE3FC4414C4D4C0AA99FBD0C135EF4A</key>
 		<string>github.com:Jessjeanjo/meow.git</string>
+		<key>4E9B56E425E5161CBCDE12EF82CE4C3B6CA945A8</key>
+		<string>github.com:danagilliann/Meyow.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>GMapsTest.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2E87226BEEE3FC4414C4D4C0AA99FBD0C135EF4A</key>
+		<string>../../meow</string>
+		<key>4E9B56E425E5161CBCDE12EF82CE4C3B6CA945A8</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:Jessjeanjo/meow.git</string>
+	<string>github.com:danagilliann/Meyow.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2E87226BEEE3FC4414C4D4C0AA99FBD0C135EF4A</string>
+	<string>4E9B56E425E5161CBCDE12EF82CE4C3B6CA945A8</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>2E87226BEEE3FC4414C4D4C0AA99FBD0C135EF4A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>meow</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4E9B56E425E5161CBCDE12EF82CE4C3B6CA945A8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Meyow</string>
 		</dict>
 	</array>
 </dict>

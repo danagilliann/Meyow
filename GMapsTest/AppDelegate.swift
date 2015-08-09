@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import GoogleMaps
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyBp9D_pQ4UG_GeIcaNGYB8oSzLeLoa1cN8")
         
         Parse.setApplicationId("lWbsp2Ff80NfdnliyH1KU5Q80lIxA2vgC2WlZfJ4", clientKey: "dKjPaNxFoUQ4ypteX1xnKKtvt8lOdHiKWbaRJ713")
-        
+                Fabric.with([Crashlytics()])
+                
         // Override point for customization after application launch.
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

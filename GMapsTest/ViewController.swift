@@ -153,8 +153,70 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
 //            
 //        }
     }
+//    
+//    func googleMaps() {
+//        let locationManager = CLLocationManager()
+//        
+//        locationManager.requestWhenInUseAuthorization()
+//        
+//        if (CLLocationManager.locationServicesEnabled())
+//        {
+//            locationManager.delegate = self
+//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//            locationManager.requestAlwaysAuthorization()
+//            locationManager.startUpdatingLocation()
+//        }
+//        
+//        var currentPosition = CLLocation()
+//        
+//        
+//        var myLat = 40.7531589 //currentPosition.coordinate.latitude
+//        var myLong = -73.9893598 //currentPosition.coordinate.longitude
+//        
+//        
+//        var camera = GMSCameraPosition.cameraWithLatitude(myLat, longitude: myLong, zoom: 18, bearing: 7, viewingAngle: 0)
+//        var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+//        mapView.myLocationEnabled = true
+//        self.view = mapView
+//        
+//        
+//        var marker = GMSMarker()
+//        
+//        marker.position = CLLocationCoordinate2DMake(myLat, myLong)
+//        
+//        let markerButton = UIButton(frame: CGRectMake(80, 400, 150, 40))
+//        self.view.addSubview(markerButton)
+//        markerButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+//        markerButton.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+//        markerButton.setTitle("SEND MEOW", forState: UIControlState.Normal)
+//        markerButton.backgroundColor = UIColor.blackColor()
+//        markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
+//        
+//        
+//        let moreMeows = UIButton(frame: CGRectMake(80, 450, 150, 40))
+//        self.view.addSubview(moreMeows)
+//        moreMeows.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+//        moreMeows.addTarget(self, action: "moreMeowsButtonFunc:", forControlEvents: .TouchUpInside)
+//        moreMeows.setTitle("VIEW MEOWS", forState: UIControlState.Normal)
+//        moreMeows.backgroundColor = UIColor.blackColor()
+//        moreMeows.titleLabel?.adjustsFontSizeToFitWidth = true
+//        
+//        let donateButton = UIButton(frame: CGRectMake(80, 500, 150, 40))
+//        self.view.addSubview(donateButton)
+//        donateButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+//        donateButton.addTarget(self, action: "paypal:", forControlEvents: .TouchUpInside)
+//        donateButton.setTitle("DONATE", forState: UIControlState.Normal)
+//        donateButton.backgroundColor = UIColor.blackColor()
+//        donateButton.titleLabel?.adjustsFontSizeToFitWidth = true
+//
+//        
+//        marker.map = mapView
+//        
+//    }
     
     func googleMaps() {
+        
+        
         let locationManager = CLLocationManager()
         
         locationManager.requestWhenInUseAuthorization()
@@ -174,15 +236,18 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         var myLong = -73.9893598 //currentPosition.coordinate.longitude
         
         
-        var camera = GMSCameraPosition.cameraWithLatitude(myLat, longitude: myLong, zoom: 18, bearing: 7, viewingAngle: 0)
+        var camera = GMSCameraPosition.cameraWithLatitude(myLat, longitude: myLong, zoom: 15, bearing: 7, viewingAngle: 0)
         var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
         mapView.myLocationEnabled = true
         self.view = mapView
         
         
+        
+        
         var marker = GMSMarker()
         
         marker.position = CLLocationCoordinate2DMake(myLat, myLong)
+        
         
         let markerButton = UIButton(frame: CGRectMake(80, 400, 150, 40))
         self.view.addSubview(markerButton)
@@ -191,16 +256,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         markerButton.setTitle("SEND MEOW", forState: UIControlState.Normal)
         markerButton.backgroundColor = UIColor.blackColor()
         markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        
-        
+
+
         let moreMeows = UIButton(frame: CGRectMake(80, 450, 150, 40))
         self.view.addSubview(moreMeows)
         moreMeows.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        moreMeows.addTarget(self, action: "moreMeowsButtonFunc:", forControlEvents: .TouchUpInside)
+        moreMeows.addTarget(self, action: "getPoint:", forControlEvents: .TouchUpInside)
         moreMeows.setTitle("VIEW MEOWS", forState: UIControlState.Normal)
         moreMeows.backgroundColor = UIColor.blackColor()
         moreMeows.titleLabel?.adjustsFontSizeToFitWidth = true
-        
+
         let donateButton = UIButton(frame: CGRectMake(80, 500, 150, 40))
         self.view.addSubview(donateButton)
         donateButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
@@ -208,11 +273,33 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         donateButton.setTitle("DONATE", forState: UIControlState.Normal)
         donateButton.backgroundColor = UIColor.blackColor()
         donateButton.titleLabel?.adjustsFontSizeToFitWidth = true
-
-        
+    
         marker.map = mapView
         
+        var m2 = GMSMarker()
+        m2.position = CLLocationCoordinate2DMake(43.6, -73.3)
+        m2.map = mapView
+        
+        var point = [PFGeoPoint]()
+        
+        point.append(PFGeoPoint(latitude:40.7716287, longitude:-73.9881174))
+        point.append(PFGeoPoint(latitude:40.7677812, longitude:-73.9823331))
+        point.append(PFGeoPoint(latitude:40.7660594, longitude:-73.9662389))
+        point.append(PFGeoPoint(latitude:40.7173346, longitude:-74.0073864))
+        point.append(PFGeoPoint(latitude:41.12780, longitude:-73.29837))
+        
+        
+        for p in point {
+            var marker = GMSMarker()
+            marker.position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
+            marker.map = mapView
+            println(p)
+            
+        }
+
+        
     }
+
     
     func returnUserData() {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
