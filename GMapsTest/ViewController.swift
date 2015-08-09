@@ -23,7 +23,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         {
             // User is already logged in, do work such as go to next view controller.
             
-            //print("hello")
             // Or Show Logout Button
             self.view.addSubview(loginView)
             loginView.center = self.view.center
@@ -103,7 +102,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
     
     
     
-    func moreMeowsButtonFunc(moreMeows: UIButton) {
+    func moreMeowsButtonFunc(moreMeows:UIButton) {
+        println("In more meows func")
         
         var point = [PFGeoPoint]()
         
@@ -126,6 +126,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
             var marker = GMSMarker()
             marker.position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
             //marker.map = mapView
+            println(p)
             
         }
     }
@@ -169,13 +170,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         markerButton.backgroundColor = UIColor.blackColor()
         markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        
-        
-        func markerButtonFunc(markerButton: UIButton) {
-            self.pressed(markerButton)
-        }
-        
-
         let moreMeows = UIButton(frame: CGRectMake(110, 600, 150, 40))
         self.view.addSubview(moreMeows)
         moreMeows.setTitleColor(UIColor.whiteColor(), forState: .Normal)
