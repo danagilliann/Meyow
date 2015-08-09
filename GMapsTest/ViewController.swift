@@ -13,30 +13,30 @@ import GoogleMaps
 class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        let loginView : FBSDKLoginButton = FBSDKLoginButton()
-
-        
-        if (FBSDKAccessToken.currentAccessToken() != nil)
-        {
-            // User is already logged in, do work such as go to next view controller.
+            super.viewDidLoad()
+            // Do any additional setup after loading the view, typically from a nib.
             
-            // Or Show Logout Button
-            self.view.addSubview(loginView)
-            loginView.center = self.view.center
-            loginView.readPermissions = ["public_profile", "email", "user_friends"]
-            loginView.delegate = self
-            self.returnUserData()
-        }
-        else
-        {
-            self.view.addSubview(loginView)
-            loginView.center = self.view.center
-            loginView.readPermissions = ["public_profile", "email", "user_friends"]
-            loginView.delegate = self
-        }
+            let loginView : FBSDKLoginButton = FBSDKLoginButton()
+
+            
+            if (FBSDKAccessToken.currentAccessToken() != nil)
+            {
+                // User is already logged in, do work such as go to next view controller.
+                
+                // Or Show Logout Button
+                self.view.addSubview(loginView)
+                loginView.center = self.view.center
+                loginView.readPermissions = ["public_profile", "email", "user_friends"]
+                loginView.delegate = self
+                self.returnUserData()
+            }
+            else
+            {
+                self.view.addSubview(loginView)
+                loginView.center = self.view.center
+                loginView.readPermissions = ["public_profile", "email", "user_friends"]
+                loginView.delegate = self
+            }
         
     }
     
@@ -99,8 +99,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
             
         }
     }
-    
-    
     
     func moreMeowsButtonFunc(moreMeows:UIButton) {
         println("In more meows func")
@@ -170,6 +168,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         markerButton.backgroundColor = UIColor.blackColor()
         markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
+        if markerButton.action = pressed {
+            pressed(markerButton)
+        }
+        
         let moreMeows = UIButton(frame: CGRectMake(110, 600, 150, 40))
         self.view.addSubview(moreMeows)
         moreMeows.setTitleColor(UIColor.whiteColor(), forState: .Normal)
@@ -178,47 +180,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         moreMeows.backgroundColor = UIColor.blackColor()
         moreMeows.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        func moreMeowsFunc(moreMeows: UIButton) {
-            self.moreMeowsButtonFunc(moreMeows)
+        
+        if moreMeows.action = pressed {
+            moreMeowsButtonFunc(moreMeows)
         }
+
         
         marker.map = mapView
         
     }
     
-    
-    func seeOther(){
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-            if error == nil {
-                // do something with the new geoPoint
-                // Create a query for places
-                var query = PFQuery(className:"locationOfMeows")
-                // Interested in locations near user.
-                query.whereKey("location", nearGeoPoint:geoPoint!)
-                // Limit what could be a lot of points.
-                query.limit = 100
-                // Final list of objects
-                var objects = query.findObjects()
-                
-                if let objects = objects as? [PFObject] {
-                    for object in objects {
-                        var marker = GMSMarker()  //can be more efficient, but it works for now!!
-                        var point = object["location"] as! PFGeoPoint
-                        marker.position = CLLocationCoordinate2DMake(point.latitude, point.longitude)
-                    }
-                }
-            }
-            else
-            {
-                // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
-            }
-        }
-    }
-    
-
-        
     func returnUserData() {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
@@ -248,6 +219,38 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+//    func seeOther(){
+//        PFGeoPoint.geoPointForCurrentLocationInBackground {
+//            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+//            if error == nil {
+//                // do something with the new geoPoint
+//                // Create a query for places
+//                var query = PFQuery(className:"locationOfMeows")
+//                // Interested in locations near user.
+//                query.whereKey("location", nearGeoPoint:geoPoint!)
+//                // Limit what could be a lot of points.
+//                query.limit = 100
+//                // Final list of objects
+//                var objects = query.findObjects()
+//                
+//                if let objects = objects as? [PFObject] {
+//                    for object in objects {
+//                        var marker = GMSMarker()  //can be more efficient, but it works for now!!
+//                        var point = object["location"] as! PFGeoPoint
+//                        marker.position = CLLocationCoordinate2DMake(point.latitude, point.longitude)
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                // Log details of the failure
+//                println("Error: \(error!) \(error!.userInfo!)")
+//            }
+//        }
+//    }
+    
+
     
 }
 
