@@ -101,8 +101,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         }
     }
     
+    
+    
     func moreMeowsButtonFunc(moreMeows: UIButton) {
-        
         
         var point = [PFGeoPoint]()
         
@@ -184,7 +185,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         moreMeows.titleLabel?.adjustsFontSizeToFitWidth = true
         
         func moreMeowsFunc(moreMeows: UIButton) {
-            self.pressed(moreMeows)
+            self.moreMeowsButtonFunc(moreMeows)
         }
         
         marker.map = mapView
