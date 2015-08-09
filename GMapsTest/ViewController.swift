@@ -137,11 +137,11 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         point1.map = mapView
     
         var point2 = GMSMarker()
-        point2.position = CLLocationCoordinate2DMake(41.2759, -73.2894)
+        point2.position = CLLocationCoordinate2DMake(40.753190, -73.2894)
         point2.map = mapView
         
         var point3 = GMSMarker()
-        point3.position = CLLocationCoordinate2DMake(4.3, -73.7821)
+        point3.position = CLLocationCoordinate2DMake(40.753187, -73.7821)
         point3.map = mapView
         
         
