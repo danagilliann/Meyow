@@ -126,7 +126,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
         var marker = GMSMarker()
         
-        //marker.title = "SEND MEOW"
         marker.position = CLLocationCoordinate2DMake(myLat, myLong)
         
         
@@ -138,7 +137,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         markerButton.backgroundColor = UIColor.blackColor()
         markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        @IBAction weak var markerButton (UIButton) {
+        func markerButtonFunc(markerButton: UIButton) {
             self.pressed(markerButton)
         }
         
