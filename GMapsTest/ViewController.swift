@@ -86,8 +86,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
             if (success) {
                 // The object has been saved.
                 println("Success")
-                marker.snippet = "success"
-                marker.appearAnimation = kGMSMarkerAnimationPop
+                //marker.snippet = "success"
+                //marker.appearAnimation = kGMSMarkerAnimationPop
+                markerButton.setTitle("Meow Sent", forState: .Normal)
                 
             } else {
                 println("Not saved")
@@ -125,20 +126,23 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
         var marker = GMSMarker()
         
-        marker.title = "SEND MEOW"
+        //marker.title = "SEND MEOW"
         marker.position = CLLocationCoordinate2DMake(myLat, myLong)
+        
         
         let markerButton = UIButton(frame: CGRectMake(110, 550, 150, 40))
         self.view.addSubview(markerButton)
         markerButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         markerButton.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
-        markerButton.setTitle(marker.title, forState: UIControlState.Normal)
+        markerButton.setTitle("SEND MEOW", forState: UIControlState.Normal)
         markerButton.backgroundColor = UIColor.blackColor()
         markerButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
+        @IBAction weak var markerButton (UIButton) {
+            self.pressed(markerButton)
+        }
         
         marker.map = mapView
-        pressed(markerButton)
         
     }
     
