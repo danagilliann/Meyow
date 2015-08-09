@@ -133,14 +133,13 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
                         var marker = GMSMarker()  //can be more efficient, but it works for now!!
                         var point = object["location"] as! PFGeoPoint
                         marker.position = CLLocationCoordinate2DMake(point.latitude, point.longitude)
-                        println(object.objectId)
                     }
                 }
-            } else {
+            }
+            else
+            {
                 // Log details of the failure
                 println("Error: \(error!) \(error!.userInfo!)")
-            }
-            
             }
         }
     }
@@ -167,38 +166,38 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
                 }
             }
         }
+    }
         
-        func returnUserData()
-        {
-            let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-            graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-                
-                
-                if ((error) != nil)
-                {
-                    // Process error
-                    println("Error: \(error)")
-                }
-                else
-                {
-                    println("fetched user: \(result)")
-                    let userName : NSString = result.valueForKey("name") as! NSString
-                    println("User Name is: \(userName)")
-                    let userId : NSString = result.valueForKey("id") as! NSString
-                    
-                    
-                    self.googleMaps()
-                }
-                
-            })
+    func returnUserData() {
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
-        }
+            
+            if ((error) != nil)
+            {
+                // Process error
+                println("Error: \(error)")
+            }
+            else
+            {
+                println("fetched user: \(result)")
+                let userName : NSString = result.valueForKey("name") as! NSString
+                println("User Name is: \(userName)")
+                let userId : NSString = result.valueForKey("id") as! NSString
+                
+                
+                self.googleMaps()
+            }
+            
+        })
         
-        func didReceiveMemoryWarning() {
-            super.didReceiveMemoryWarning()
-            // Dispose of any resources that can be recreated.
-        }
-        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
 }
 
 
