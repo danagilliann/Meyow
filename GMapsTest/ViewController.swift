@@ -107,52 +107,52 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         
     }
     
-    func moreMeowsButtonFunc(moreMeows:UIButton) {
-        println("In more meows func")
-        var myLat = 40.7531589 //currentPosition.coordinate.latitude
-        var myLong = -73.9893598 //currentPosition.coordinate.longitude
-        
-        var camera = GMSCameraPosition.cameraWithLatitude(myLat, longitude: myLong, zoom: 10, bearing: 7, viewingAngle: 0)
-        var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-        
-        var point = [PFGeoPoint]()
-        
-        point.append(PFGeoPoint(latitude:40.753189, longitude:-73.9893598))
-        point.append(PFGeoPoint(latitude:41.2759, longitude:-73.2894))
-        point.append(PFGeoPoint(latitude:4.3, longitude:-73.7821))
-        point.append(PFGeoPoint(latitude:40.0, longitude:-73.2873))
-        point.append(PFGeoPoint(latitude:41.12780, longitude:-73.29837))
-        point.append(PFGeoPoint(latitude:41.8932, longitude:-72.98273))
-        point.append(PFGeoPoint(latitude: 41.3122, longitude:-72.9283))
-        point.append(PFGeoPoint(latitude:40.84934, longitude:-73.8932))
-        point.append(PFGeoPoint(latitude:41.2478, longitude:-73.8324))
-        point.append(PFGeoPoint(latitude:41.2112, longitude:-73.3874))
-        point.append(PFGeoPoint(latitude:41.9575, longitude:-72.9203))
-        point.append(PFGeoPoint(latitude:40.5639, longitude:-73.193))
-        point.append(PFGeoPoint(latitude:41.9473, longitude:-72.8902))
-        point.append(PFGeoPoint(latitude:40.124, longitude:-73.1946439))
-        
-        var point1 = GMSMarker()
-        point1.position = CLLocationCoordinate2DMake(40.753189, -73.9893598)
-        point1.map = mapView
-    
-        var point2 = GMSMarker()
-        point2.position = CLLocationCoordinate2DMake(40.753190, -73.2894)
-        point2.map = mapView
-        
-        var point3 = GMSMarker()
-        point3.position = CLLocationCoordinate2DMake(40.753187, -73.7821)
-        point3.map = mapView
-        
-        
-//        for p in point {
-//            var marker = GMSMarker()
-//            marker.position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
-//            //marker.map = mapView
-//            println(p)
-//            
-//        }
-    }
+//    func moreMeowsButtonFunc(moreMeows:UIButton) {
+//        println("In more meows func")
+//        var myLat = 40.7531589 //currentPosition.coordinate.latitude
+//        var myLong = -73.9893598 //currentPosition.coordinate.longitude
+//        
+//        var camera = GMSCameraPosition.cameraWithLatitude(myLat, longitude: myLong, zoom: 10, bearing: 7, viewingAngle: 0)
+//        var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+//        
+//        var point = [PFGeoPoint]()
+//        
+//        point.append(PFGeoPoint(latitude:40.753189, longitude:-73.9893598))
+//        point.append(PFGeoPoint(latitude:41.2759, longitude:-73.2894))
+//        point.append(PFGeoPoint(latitude:4.3, longitude:-73.7821))
+//        point.append(PFGeoPoint(latitude:40.0, longitude:-73.2873))
+//        point.append(PFGeoPoint(latitude:41.12780, longitude:-73.29837))
+//        point.append(PFGeoPoint(latitude:41.8932, longitude:-72.98273))
+//        point.append(PFGeoPoint(latitude: 41.3122, longitude:-72.9283))
+//        point.append(PFGeoPoint(latitude:40.84934, longitude:-73.8932))
+//        point.append(PFGeoPoint(latitude:41.2478, longitude:-73.8324))
+//        point.append(PFGeoPoint(latitude:41.2112, longitude:-73.3874))
+//        point.append(PFGeoPoint(latitude:41.9575, longitude:-72.9203))
+//        point.append(PFGeoPoint(latitude:40.5639, longitude:-73.193))
+//        point.append(PFGeoPoint(latitude:41.9473, longitude:-72.8902))
+//        point.append(PFGeoPoint(latitude:40.124, longitude:-73.1946439))
+//        
+//        var point1 = GMSMarker()
+//        point1.position = CLLocationCoordinate2DMake(40.753189, -73.9893598)
+//        point1.map = mapView
+//    
+//        var point2 = GMSMarker()
+//        point2.position = CLLocationCoordinate2DMake(40.753190, -73.2894)
+//        point2.map = mapView
+//        
+//        var point3 = GMSMarker()
+//        point3.position = CLLocationCoordinate2DMake(40.753187, -73.7821)
+//        point3.map = mapView
+//        
+//        
+////        for p in point {
+////            var marker = GMSMarker()
+////            marker.position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
+////            //marker.map = mapView
+////            println(p)
+////            
+////        }
+//    }
     
     func googleMaps() {
         let locationManager = CLLocationManager()
@@ -196,7 +196,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
         let moreMeows = UIButton(frame: CGRectMake(80, 450, 150, 40))
         self.view.addSubview(moreMeows)
         moreMeows.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        moreMeows.addTarget(self, action: "moreMeowsButtonFunc:", forControlEvents: .TouchUpInside)
+        //moreMeows.addTarget(self, action: "moreMeowsButtonFunc:", forControlEvents: .TouchUpInside)
         moreMeows.setTitle("VIEW MEOWS", forState: UIControlState.Normal)
         moreMeows.backgroundColor = UIColor.blackColor()
         moreMeows.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -211,6 +211,27 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationMana
 
         
         marker.map = mapView
+        
+        var point = [PFGeoPoint]()
+        
+        point.append(PFGeoPoint(latitude:40.7225026, longitude:-74.0011138))
+        point.append(PFGeoPoint(latitude:40.7216207, longitude:-73.9964317))
+        point.append(PFGeoPoint(latitude:40.7270938, longitude:-74.0054143))
+        point.append(PFGeoPoint(latitude:40.7778028, longitude:-73.9803174))
+        point.append(PFGeoPoint(latitude:40.77389, longitude:-73.9658541))
+        point.append(PFGeoPoint(latitude:40.755816, longitude:-73.9760635))
+        point.append(PFGeoPoint(latitude:40.7595841, longitude:-73.9864371))
+        point.append(PFGeoPoint(latitude:40.7580006, longitude:-73.9847009))
+        point.append(PFGeoPoint(latitude:40.7410146, longitude:-73.9913171))
+        
+        for p in point {
+            var position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
+            var marker = GMSMarker(position: position)
+            //marker.position = CLLocationCoordinate2DMake(p.latitude, p.longitude)
+            marker.map = mapView
+            println(p)
+            
+        }
         
     }
     
